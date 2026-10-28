@@ -1,5 +1,5 @@
 # 베이스 이미지로 OpenJDK 17 버전의 JRE 이미지 사용
-#FROM openjdk:26-ea-21-jdk-slim
+FROM openjdk:26-ea-21-jdk-slim
 #FROM eclipse-temurin:21-jre
 FROM skala-registry.skala-ai.com/library/eclipse-temurin:21-jre
 
@@ -16,12 +16,8 @@ EXPOSE 8081
 #                              value: "-Xms256m -Xmx512m"
 #ENV JAVA_OPTS="-Xms256m -Xmx512m"
 
-# 외부에서 받아들일 변수 선언
-#ARG JAR_FILE
-
 # 애플리케이션의 jar 파일을 컨테이너에 추가
-#ADD ${JAR_FILE}  app.jar
 ADD ./target/*.jar  app.jar
 
 # 애플리케이션 실행 (JAVA_OPTS 환경변수 적용)
-CMD ["sh", "-c", "exec java $JAVA_OPTS -jar app.jar"]
+CMD ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
